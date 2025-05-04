@@ -4,7 +4,7 @@
 
 CardioRural is a lightweight, open-source cardiovascular risk assessment tool built with [Streamlit](https://streamlit.io/). It is designed to bring preventive heart health screening to underserved rural populations through mobile and offline-friendly technology
 
-![CardioRural Screenshot](./Screenshot.PNG)
+![CardioRural Screenshot](https://github.com/AFB-M/cardiorural-app/blob/main/Screenshot.PNG?raw=true)
 
 ---
 
