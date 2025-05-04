@@ -4,6 +4,14 @@
 
 CardioRural is a lightweight, open-source cardiovascular risk assessment tool built with [Streamlit](https://streamlit.io/). It is designed to bring preventive heart health screening to underserved rural populations through mobile and offline-friendly technology.
 
+![CardioRural Screenshot](./Screenshot.PNG)
+
+---
+
+## 🚀 Try it Live
+
+👉 [Launch CardioRural App](https://cardiorural-app-7vwrrh.streamlit.app/)
+
 ---
 
 ## 💡 Why This Matters
@@ -12,50 +20,62 @@ Cardiovascular disease (CVD) is a leading cause of death in Nigeria—and rural 
 
 - Using simple clinical questions to estimate risk
 - Offering personalized lifestyle guidance
-- Making CVD screening accessible on mobile
+- Making CVD screening accessible on mobile devices
 
 ---
 
-## 🔧 Features (MVP)
+## 🔧 Features
 
-- Simple user interface (Streamlit)
-- Inputs: age, sex, BP status, diabetes, smoking, etc.
-- Outputs: Low, Moderate, or High CVD risk
-- Health advice based on risk score
+- Simple UI for mobile-friendly use
+- Collects basic inputs: age, sex, weight, blood pressure, smoking, and diabetes status
+- Outputs: Low, Moderate, or High CVD risk category
+- Personalized message based on risk level
 
 ---
 
 ## 🧪 How It Works
 
-This version uses a **rule-based risk scoring logic** inspired by WHO/Framingham guidelines. In future iterations, we’ll integrate real patient data and predictive modeling.
+This version uses a **rule-based risk scoring logic** based on early-stage public health screening principles (inspired by Framingham and WHO tools). In future versions, we will:
+
+- Train a logistic regression or decision tree model with real-world data
+- Improve predictive accuracy
+- Tailor for African populations
 
 ---
 
 ## 📦 Tech Stack
 
-- Python 3
+- Python
 - Streamlit
 - Pandas
-- Scikit-learn (planned)
+- Scikit-learn *(coming soon)*
 
 ---
 
 ## 🗺️ Roadmap
 
-- ✅ MVP live version
-- 🔲 Real-world risk model (logistic regression)
-- 🔲 Local language adaptation (Yoruba, Hausa, Igbo)
-- 🔲 Offline support with local data storage
-- 🔲 NGO partnership and pilot testing
+- ✅ MVP live app completed
+- 🔲 Local language support (Yoruba, Hausa, Igbo)
+- 🔲 SMS-based access
+- 🔲 AI-driven predictions
+- 🔲 NGO collaboration for pilot testing
 
 ---
 
 ## 📜 License
 
-This project is licensed under the MIT License.
+This project is licensed under the **MIT License** – feel free to use, fork, and build on it.
 
 ---
 
 ## 👤 Author
 
-Built by [Afolabi Mahmood Olalekan](https://www.linkedin.com/in/your-link-here), a Medical Student and Data Scientist working to bring digital health to underserved African communities.
+**Afolabi Mahmood Olalekan**  
+Medical student • Data Scientist • Digital health advocate  
+🌍 Nigeria  
+🔗 [LinkedIn](https://www.linkedin.com/in/your-link-here) | 🔗 [GitHub](https://github.com/AFB-M)
+
+---
+
+> **This is an early-stage risk estimation tool. Not a substitute for medical advice. Always consult a healthcare professional.**
+
