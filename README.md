@@ -73,7 +73,7 @@ This project is licensed under the **MIT License** – feel free to use, fork, a
 **Afolabi Mahmood Olalekan**  
 Medical student • Data Scientist • Digital health advocate  
 🌍 Nigeria  
-🔗 [LinkedIn](https://www.linkedin.com/in/your-link-here) | 🔗 [GitHub](https://github.com/AFB-M)
+🔗 [LinkedIn](https://www.linkedin.com/in/afolabi-mahmood-olalekan/) | 🔗 [GitHub](https://github.com/AFB-M)
 
 ---
 
