@@ -3,7 +3,7 @@ import joblib
 import numpy as np
 
 # Load trained model
-model = joblib.load("cr_model.pkl")
+model = joblib.load("App/cr_model.pkl")
 
 st.set_page_config(page_title="CardioRural: Heart Health Risk Screener", layout="centered")
 
