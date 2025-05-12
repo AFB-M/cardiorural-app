@@ -4,7 +4,7 @@ import pandas as pd
 import joblib
 
 # Load model
-model = joblib.load("model.pkl")  # make sure it's in the same directory or use full path
+model = joblib.load("cr_model.pkl")  # make sure it's in the same directory or use full path
 
 # Function to preprocess input
 def preprocess_input(age, sex, chest_pain, resting_bp, cholesterol, fasting_bs, ecg, max_hr, angina, oldpeak, slope):
