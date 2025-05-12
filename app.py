@@ -1,8 +1,32 @@
 import streamlit as st
+import numpy as np
+import pandas as pd
+import joblib
 
+# Load model
+model = joblib.load("model.pkl")  # make sure it's in the same directory or use full path
+
+# Function to preprocess input
+def preprocess_input(age, sex, chest_pain, resting_bp, cholesterol, fasting_bs, ecg, max_hr, angina, oldpeak, slope):
+    # Encode categorical values as done in training
+    sex = 1 if sex == "M" else 0
+    chest_pain_map = {"TA": 0, "ATA": 1, "NAP": 2, "ASY": 3}
+    ecg_map = {"Normal": 0, "ST": 1, "LVH": 2}
+    angina = 1 if angina == "Y" else 0
+    slope_map = {"Up": 0, "Flat": 1, "Down": 2}
+
+    # Construct input vector
+    input_data = np.array([
+        age, sex, chest_pain_map[chest_pain], resting_bp, cholesterol, fasting_bs,
+        ecg_map[ecg], max_hr, angina, oldpeak, slope_map[slope]
+    ]).reshape(1, -1)
+
+    return input_data
+
+# UI
 st.title("CardioRural: Heart Health Risk Screener")
-
 st.header("Enter Your Information")
+
 age = st.number_input("Age (years)", help="Age of the patient in years")
 sex = st.selectbox("Sex", options=["M", "F"], help="Male or Female")
 chest_pain = st.selectbox(
@@ -27,5 +51,15 @@ st_slope = st.selectbox(
     help="Up: upsloping, Flat: flat, Down: downsloping"
 )
 
-    st.subheader(f"Your Risk Level: {risk_label}")
-    st.info("This is an early-stage risk estimation based on basic factors.")
+# Prediction
+if st.button("Check Risk"):
+    user_input = preprocess_input(age, sex, chest_pain, resting_bp, cholesterol, fasting_bs, ecg, max_hr, angina, oldpeak, slope)
+    prediction = model.predict(user_input)[0]
+    prob = model.predict_proba(user_input)[0][1] * 100
+
+    if prediction == 1:
+        st.error(f"High Risk Detected: {prob:.2f}% probability of heart disease.")
+    else:
+        st.success(f"Low Risk: {100 - prob:.2f}% probability of being healthy.")
+
+    st.caption("This is an AI-based early prediction and does not replace professional medical diagnosis.")
