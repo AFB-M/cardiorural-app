@@ -49,22 +49,28 @@ st_slope = st.selectbox(
     help="Up: upsloping, Flat: flat, Down: downsloping"
 )
 
-# Button to check risk
-if st.button("Check Risk"):
-    # Make prediction
-    input_data = np.array([[age, sex, chest_pain, resting_bp, cholesterol, fasting_bs,
-                            resting_ecg, max_hr, exercise_angina, oldpeak, st_slope]])
-    
-    prediction = model.predict(input_data)
-    risk_label = "High Risk" if prediction[0] == 1 else "Low Risk"
+# Convert inputs to DataFrame
+input_dict = {
+    "Age": [age],
+    "Sex": [sex],
+    "ChestPainType": [chest_pain],
+    "RestingBP": [resting_bp],
+    "Cholesterol": [cholesterol],
+    "FastingBS": [fasting_bs],
+    "RestingECG": [resting_ecg],
+    "MaxHR": [max_hr],
+    "ExerciseAngina": [exercise_angina],
+    "Oldpeak": [oldpeak],
+    "ST_Slope": [st_slope]
+}
 
-    # Show result
-    st.subheader("Your Result:")
-    if prediction[0] == 1:
-        st.error(f"**{risk_label} of Heart Disease**")
-        st.markdown("Please consult a doctor for further evaluation.")
-    else:
-        st.success(f"**{risk_label} of Heart Disease**")
-        st.markdown("No immediate concern based on this screening.")
+input_df = pd.DataFrame(input_dict)
+
+# Predict and display result
+if st.button("Check Risk"):
+    prediction = model.predict(input_df)[0]
+    risk_label = "High Risk" if prediction == 1 else "Low Risk"
+    st.subheader(f"Your Risk Level: {risk_label}")
+    st.info("This is an early-stage risk estimation based on basic factors.")
 
     st.caption("Note: This tool is for educational and preliminary screening purposes only.")
