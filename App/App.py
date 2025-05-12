@@ -8,7 +8,40 @@ model = joblib.load("App/cr_model.pkl")
 
 st.set_page_config(page_title="CardioRural: Heart Health Risk Screener", layout="centered")
 
-st.title("CardioRural: Heart Health Risk Screener")
+st.title("CardioRural: Heart Health Risk Checker")
+
+with st.expander("🔍 Explanation of Medical Terms and Abbreviations"):
+    st.markdown("""
+    ### 💡 Abbreviations and Medical Terms
+    
+    - **Age**: Age of the individual in years  
+    - **Sex**: Biological sex (0 = Female, 1 = Male)  
+    - **Chest Pain Type**:  
+        - **TA**: Typical Angina – classic chest pain due to poor blood supply to the heart  
+        - **ATA**: Atypical Angina – chest pain not following the typical pattern  
+        - **NAP**: Non-Anginal Pain – pain not related to the heart  
+        - **ASY**: Asymptomatic – no chest pain  
+    - **Resting Blood Pressure**: Blood pressure measured while resting (in mm Hg)  
+    - **Cholesterol**: Serum cholesterol in mg/dl  
+    - **Fasting Blood Sugar > 120 mg/dl**:  
+        - **1**: Yes  
+        - **0**: No  
+    - **Resting ECG**: Electrocardiogram results  
+        - **Normal**: Normal ECG  
+        - **ST**: Having ST-T wave abnormality  
+        - **LVH**: Left Ventricular Hypertrophy  
+    - **Max Heart Rate Achieved**: Peak heart rate during exercise  
+    - **Exercise-Induced Angina**:  
+        - **1**: Yes (chest pain during exercise)  
+        - **0**: No  
+    - **Oldpeak**: ST depression induced by exercise relative to rest  
+    - **ST Slope**: Slope of the peak exercise ST segment  
+        - **Upsloping**: Minimal risk  
+        - **Flat**: Moderate risk  
+        - **Downsloping**: Higher risk  
+    """)
+
+
 st.markdown(
     """
     This tool provides an **early-stage screening** for heart disease risk based on basic health information.
