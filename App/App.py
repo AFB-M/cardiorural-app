@@ -100,7 +100,7 @@ input_dict = {
 
 input_df = pd.DataFrame(input_dict)
 
-# Predict and display result
+
 if st.button("Check Risk"):
     prediction = model.predict(input_df)[0]
     risk_label = "High Risk" if prediction == 1 else "Low Risk"
