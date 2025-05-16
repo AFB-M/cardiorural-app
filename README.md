@@ -37,7 +37,7 @@ CardioRural bridges this gap by:
 ## 🧪 How It Works
 
 This version uses a **trained machine learning model (Logistic Regression)** to estimate heart disease risk. Built using:
-- Publicly available datasets (e.g., UCI Heart Disease Dataset)
+- Publicly available datasets (e.g., [Kaggle Heart Disease Dataset](https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction))
 - Preprocessing pipeline with `ColumnTransformer`
 - Scikit-learn model serialized via `joblib`
 
