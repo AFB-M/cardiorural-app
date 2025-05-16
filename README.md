@@ -2,80 +2,83 @@
 
 **Preventing cardiovascular disease in rural African communities using data-driven mobile screening tools.**
 
-CardioRural is a lightweight, open-source cardiovascular risk assessment tool built with [Streamlit](https://streamlit.io/). It is designed to bring preventive heart health screening to underserved rural populations through mobile and offline-friendly technology
+CardioRural is an open-source, mobile-friendly cardiovascular risk assessment tool built with [Streamlit](https://streamlit.io/). It’s designed to support underserved rural populations by enabling preventive heart screening through accessible technology.
 
-![CardioRural Screenshot](https://github.com/AFB-M/cardiorural-app/blob/main/Screenshot.PNG?raw=true)
-
----
-
-## 🚀 Try it Live
-
-👉 [Launch CardioRural App](https://cardiorural-app-7vwrrh.streamlit.app/)
+![CardioRural Screenshot](https://github.com/AFB-M/cardiorural-app/blob/main/CardioRural.PNG)
 
 ---
 
-## 💡 Why This Matters
+## 🚀 Try the App
 
-Cardiovascular disease (CVD) is a leading cause of death in Nigeria—and rural communities are hit the hardest due to lack of access to early detection tools. CardioRural helps bridge this gap by:
-
-- Using simple clinical questions to estimate risk
-- Offering personalized lifestyle guidance
-- Making CVD screening accessible on mobile devices
+👉 [Launch CardioRural Now](https://cardiopre-app-aw.streamlit.app/)
 
 ---
 
-## 🔧 Features
+## 💡 Why CardioRural?
 
-- Simple UI for mobile-friendly use
-- Collects basic inputs: age, sex, weight, blood pressure, smoking, and diabetes status
-- Outputs: Low, Moderate, or High CVD risk category
-- Personalized message based on risk level
+Cardiovascular disease (CVD) remains a top cause of death in Nigeria, with rural communities disproportionately affected due to limited access to early screening tools.
+
+CardioRural bridges this gap by:
+- Using simple clinical inputs to estimate risk
+- Delivering personalized lifestyle tips
+- Running on mobile devices with offline potential
+
+---
+
+## 🔧 Key Features
+
+- Intuitive, mobile-first user interface
+- Collects core health metrics: age, sex, blood pressure, chest pain, blood sugar, etc.
+- Predicts heart disease risk (Low, Moderate, High)
+- Provides health guidance based on risk score
 
 ---
 
 ## 🧪 How It Works
 
-This version uses a **rule-based risk scoring logic** based on early-stage public health screening principles (inspired by Framingham and WHO tools). In future versions, we will:
+This version uses a **trained machine learning model (Logistic Regression)** to estimate heart disease risk. Built using:
+- Publicly available datasets (e.g., UCI Heart Disease Dataset)
+- Preprocessing pipeline with `ColumnTransformer`
+- Scikit-learn model serialized via `joblib`
 
-- Train a logistic regression or decision tree model with real-world data
-- Improve predictive accuracy
-- Tailor for African populations
-
----
-
-## 📦 Tech Stack
-
-- Python
-- Streamlit
-- Pandas
-- Scikit-learn *(coming soon)*
+Planned upgrades:
+- Tailored models for African populations
+- Real-world community data integration
 
 ---
 
-## 🗺️ Roadmap
+## ⚙️ Tech Stack
 
-- ✅ MVP live app completed
-- 🔲 Local language support (Yoruba, Hausa, Igbo)
-- 🔲 SMS-based access
-- 🔲 AI-driven predictions
-- 🔲 NGO collaboration for pilot testing
+- Python 🐍  
+- Streamlit 📱  
+- Pandas 📊  
+- Scikit-learn 🤖
+
+---
+
+## 🛤️ Roadmap
+
+- ✅ MVP app live and functional  
+- 🔲 Local language support (Yoruba, Hausa, Igbo)  
+- 🔲 SMS-based access  
+- 🔲 AI-powered smart triage  
+- 🔲 Collaboration with NGOs & PHCs for real-world deployment
 
 ---
 
 ## 📜 License
 
-This project is licensed under the **MIT License** – feel free to use, fork, and build on it.
+This project is licensed under the **MIT License** – open for use, improvement, and deployment.
 
 ---
 
 ## 👤 Author
 
 **Afolabi Mahmood Olalekan**  
-Medical student • Data Scientist • Digital health advocate  
+Medical Student • Data Scientist • Digital Health Advocate  
 🌍 Nigeria  
 🔗 [LinkedIn](https://www.linkedin.com/in/afolabi-mahmood-olalekan/) | 🔗 [GitHub](https://github.com/AFB-M)
 
 ---
 
-> **This is an early-stage risk estimation tool. Not a substitute for medical advice. Always consult a healthcare professional.**
-
+> ⚠️ **Disclaimer:** This tool is for educational and preliminary screening purposes only. It is not a substitute for professional medical diagnosis or treatment.
