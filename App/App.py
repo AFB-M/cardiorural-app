@@ -10,49 +10,18 @@ st.set_page_config(page_title="CardioRural: Heart Health Risk Screener", layout=
 
 st.title("CardioRural: Heart Health Risk Checker")
 
-with st.expander("🔍 Explanation of Medical Terms and Abbreviations"):
-    st.markdown("""
-    ### 💡 Abbreviations and Medical Terms
-    
-    - **Age**: Age of the individual in years  
-    - **Sex**: Biological sex (0 = Female, 1 = Male)  
-    - **Chest Pain Type**:  
-        - **TA**: Typical Angina – classic chest pain due to poor blood supply to the heart  
-        - **ATA**: Atypical Angina – chest pain not following the typical pattern  
-        - **NAP**: Non-Anginal Pain – pain not related to the heart  
-        - **ASY**: Asymptomatic – no chest pain  
-    - **Resting Blood Pressure**: Blood pressure measured while resting (in mm Hg)  
-    - **Cholesterol**: Serum cholesterol in mg/dl  
-    - **Fasting Blood Sugar > 120 mg/dl**:  
-        - **1**: Yes  
-        - **0**: No  
-    - **Resting ECG**: Electrocardiogram results  
-        - **Normal**: Normal ECG  
-        - **ST**: Having ST-T wave abnormality  
-        - **LVH**: Left Ventricular Hypertrophy  
-    - **Max Heart Rate Achieved**: Peak heart rate during exercise  
-    - **Exercise-Induced Angina**:  
-        - **1**: Yes (chest pain during exercise)  
-        - **0**: No  
-    - **Oldpeak**: ST depression induced by exercise relative to rest  
-    - **ST Slope**: Slope of the peak exercise ST segment  
-        - **Upsloping**: Minimal risk  
-        - **Flat**: Moderate risk  
-        - **Downsloping**: Higher risk  
-    """)
-
-
 st.markdown(
     """
-    This tool provides an **early-stage screening** for heart disease risk based on basic health information.
-    It's not a diagnostic tool. Please consult a medical professional for proper evaluation.
+    This tool is intended for **informational use by healthcare professionals**.  
+    It provides an early-stage screening of heart disease risk based on basic clinical data.  
+    It is **not** a diagnostic tool.
     """
 )
 
 st.header("Patient Information")
 
 # User inputs
-age = st.number_input("Age", min_value=1, max_value=120, help="Enter your age in years")
+age = st.number_input("Age", min_value=1, max_value=120, help="Enter age in years")
 sex = st.selectbox("Sex", options=["M", "F"], help="M: Male, F: Female")
 
 chest_pain = st.selectbox(
@@ -61,26 +30,24 @@ chest_pain = st.selectbox(
     help="TA: Typical Angina, ATA: Atypical Angina, NAP: Non-Anginal Pain, ASY: Asymptomatic"
 )
 
-resting_bp = st.number_input("Resting Blood Pressure (mm Hg)", help="Typical range: 90 - 140 mm Hg")
-cholesterol = st.number_input("Serum Cholesterol (mg/dl)", help="Typical range: 125 - 300 mg/dl")
+resting_bp = st.number_input("Resting Blood Pressure (mm Hg)", help="e.g., 120")
+cholesterol = st.number_input("Serum Cholesterol (mg/dl)", help="e.g., 200")
 
-fasting_bs = st.selectbox("Fasting Blood Sugar > 120 mg/dl?", options=[0, 1], help="1 if blood sugar > 120 mg/dl, else 0")
+fasting_bs = st.selectbox("Fasting Blood Sugar > 120 mg/dl?", options=[0, 1], help="1 = Yes, 0 = No")
 
 resting_ecg = st.selectbox(
     "Resting ECG Result",
-    options=["Normal", "ST", "LVH"],
-    help="Normal: Normal ECG, ST: ST-T abnormality, LVH: Left Ventricular Hypertrophy"
+    options=["Normal", "ST", "LVH"]
 )
 
-max_hr = st.number_input("Maximum Heart Rate Achieved", help="Normal range: 60 - 202 bpm")
-exercise_angina = st.selectbox("Exercise-Induced Angina?", options=["Y", "N"], help="Y: Yes, N: No")
+max_hr = st.number_input("Maximum Heart Rate Achieved", help="e.g., 150")
+exercise_angina = st.selectbox("Exercise-Induced Angina?", options=["Y", "N"], help="Y = Yes, N = No")
 
 oldpeak = st.number_input("Oldpeak", help="ST depression induced by exercise (e.g., 1.4)")
 
 st_slope = st.selectbox(
     "Slope of Peak Exercise ST Segment",
-    options=["Up", "Flat", "Down"],
-    help="Up: upsloping, Flat: flat, Down: downsloping"
+    options=["Up", "Flat", "Down"]
 )
 
 # Convert inputs to DataFrame
@@ -100,11 +67,8 @@ input_dict = {
 
 input_df = pd.DataFrame(input_dict)
 
-
 if st.button("Check Risk"):
     prediction = model.predict(input_df)[0]
     risk_label = "High Risk" if prediction == 1 else "Low Risk"
-    st.subheader(f"Your Risk Level: {risk_label}")
-    st.info("This is an early-stage risk estimation based on basic factors.")
-
-    st.caption("Note: This tool is for educational and preliminary screening purposes only.")
+    st.subheader(f"Predicted Risk Level: {risk_label}")
+    st.caption("This is an early-stage estimation tool and should not replace clinical judgment.")
