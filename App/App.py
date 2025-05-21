@@ -40,7 +40,7 @@ chest_pain = st.selectbox(
 resting_bp = safe_float_input("Resting Blood Pressure (mm Hg)", "e.g., 120")
 cholesterol = safe_float_input("Serum Cholesterol (mg/dl)", "e.g., 200")
 
-# ✅ Fixed: More sensible fasting blood sugar input
+#
 fasting_bs = safe_float_input("Fasting Blood Sugar (mg/dl)", "Enter measured blood glucose level in mg/dl")
 
 resting_ecg = st.selectbox("Resting ECG Result", options=["Normal", "ST", "LVH"])
