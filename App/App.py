@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import joblib
-import numpy as np
 
 # Load trained model
 model = joblib.load("App/cr_model.pkl")
@@ -20,8 +19,16 @@ st.markdown(
 
 st.header("Patient Information")
 
-# User inputs
-age = st.number_input("Age", min_value=1, max_value=120, help="Enter age in years")
+# Input functions for clean number entry
+def safe_float_input(label, help_text=""):
+    val = st.text_input(label, help=help_text)
+    try:
+        return float(val)
+    except:
+        return None
+
+# Inputs
+age = safe_float_input("Age", "Enter age in years")
 sex = st.selectbox("Sex", options=["M", "F"], help="M: Male, F: Female")
 
 chest_pain = st.selectbox(
@@ -30,45 +37,45 @@ chest_pain = st.selectbox(
     help="TA: Typical Angina, ATA: Atypical Angina, NAP: Non-Anginal Pain, ASY: Asymptomatic"
 )
 
-resting_bp = st.number_input("Resting Blood Pressure (mm Hg)", help="e.g., 120")
-cholesterol = st.number_input("Serum Cholesterol (mg/dl)", help="e.g., 200")
+resting_bp = safe_float_input("Resting Blood Pressure (mm Hg)", "e.g., 120")
+cholesterol = safe_float_input("Serum Cholesterol (mg/dl)", "e.g., 200")
 
-fasting_bs = st.selectbox("Fasting Blood Sugar > 120 mg/dl?", options=[0, 1], help="1 = Yes, 0 = No")
+# ✅ Fixed: More sensible fasting blood sugar input
+fasting_bs = safe_float_input("Fasting Blood Sugar (mg/dl)", "Enter measured blood glucose level in mg/dl")
 
-resting_ecg = st.selectbox(
-    "Resting ECG Result",
-    options=["Normal", "ST", "LVH"]
-)
+resting_ecg = st.selectbox("Resting ECG Result", options=["Normal", "ST", "LVH"])
 
-max_hr = st.number_input("Maximum Heart Rate Achieved", help="e.g., 150")
+max_hr = safe_float_input("Maximum Heart Rate Achieved", "e.g., 150")
 exercise_angina = st.selectbox("Exercise-Induced Angina?", options=["Y", "N"], help="Y = Yes, N = No")
 
-oldpeak = st.number_input("Oldpeak", help="ST depression induced by exercise (e.g., 1.4)")
+oldpeak = safe_float_input("Oldpeak", "ST depression induced by exercise (e.g., 1.4)")
+st_slope = st.selectbox("Slope of Peak Exercise ST Segment", options=["Up", "Flat", "Down"])
 
-st_slope = st.selectbox(
-    "Slope of Peak Exercise ST Segment",
-    options=["Up", "Flat", "Down"]
-)
-
-# Convert inputs to DataFrame
-input_dict = {
-    "Age": [age],
-    "Sex": [sex],
-    "ChestPainType": [chest_pain],
-    "RestingBP": [resting_bp],
-    "Cholesterol": [cholesterol],
-    "FastingBS": [fasting_bs],
-    "RestingECG": [resting_ecg],
-    "MaxHR": [max_hr],
-    "ExerciseAngina": [exercise_angina],
-    "Oldpeak": [oldpeak],
-    "ST_Slope": [st_slope]
-}
-
-input_df = pd.DataFrame(input_dict)
-
+# Validation and model input
 if st.button("Check Risk"):
-    prediction = model.predict(input_df)[0]
-    risk_label = "High Risk" if prediction == 1 else "Low Risk"
-    st.subheader(f"Predicted Risk Level: {risk_label}")
-    st.caption("This is an early-stage estimation tool and should not replace clinical judgment.")
+    inputs = [age, sex, chest_pain, resting_bp, cholesterol, fasting_bs,
+              resting_ecg, max_hr, exercise_angina, oldpeak, st_slope]
+
+    if None in inputs:
+        st.warning("Please enter valid numeric values for all fields.")
+    else:
+        input_dict = {
+            "Age": [age],
+            "Sex": [sex],
+            "ChestPainType": [chest_pain],
+            "RestingBP": [resting_bp],
+            "Cholesterol": [cholesterol],
+            "FastingBS": [1 if fasting_bs > 120 else 0],  # binarize as expected by model
+            "RestingECG": [resting_ecg],
+            "MaxHR": [max_hr],
+            "ExerciseAngina": [exercise_angina],
+            "Oldpeak": [oldpeak],
+            "ST_Slope": [st_slope]
+        }
+
+        input_df = pd.DataFrame(input_dict)
+        prediction = model.predict(input_df)[0]
+        risk_label = "High Risk" if prediction == 1 else "Low Risk"
+
+        st.subheader(f"Predicted Risk Level: {risk_label}")
+        st.caption("This is an early-stage estimation tool and should not replace clinical judgment.")
