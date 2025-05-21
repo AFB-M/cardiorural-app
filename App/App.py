@@ -37,7 +37,7 @@ def validated_float_input(label, min_val, max_val, help_text=""):
 age = validated_float_input("Age", 0, 120, "Enter age in years")
 sex = st.selectbox("Sex", options=["M", "F"], help="M: Male, F: Female")
 chest_pain = st.selectbox("Chest Pain Type", options=["TA", "ATA", "NAP", "ASY"])
-resting_bp = validated_float_input("Resting Blood Pressure (mm Hg)", 60, 200, "e.g., 120")
+resting_bp = validated_float_input("Systolic Blood Pressure (mm Hg)", 60, 200, "e.g., 120")
 cholesterol = validated_float_input("Serum Cholesterol (mg/dl)", 100, 600, "e.g., 200")
 fasting_bs = validated_float_input("Fasting Blood Sugar (mg/dl)", 50, 400, "Enter measured glucose level")
 resting_ecg = st.selectbox("Resting ECG Result", options=["Normal", "ST", "LVH"])
